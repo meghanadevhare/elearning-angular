@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html><nav class="navbar navbar-dark bg-primary">
+  <span class="navbar-brand mb-0 h1">REGISTRATION</span>
+  <small>
+  <a class="navbar-brand" href="/">HOME</a>
+  <a class="navbar-brand" href="/login">LOGIN</a>
+  <a class="navbar-brand" href="/">ABOUT US</a>
+  <a class="navbar-brand" href="/">CONTACT US</a>
+</small>
+</nav>
+
+  <head>
+    <style>
+    .container {
+      
+      width: 50%;
+      margin: 50px;
+      margin-left: 200px;
+    }
+    </style>
+    </head>
+<div class="container">
+    <form #registerForm="ngForm" (ngSubmit)="registerUser()">
+      <small class="text-danger">
+        {{msg}}
+      </small>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        
+        <input type="email" class="form-control" placeholder="Enter email" name="email" [(ngModel)]="user.email"
+           required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" #emailid="ngModel" [class.is-invalid]="emailid.invalid && emailid.touched">
+         <!-- <small class="text-danger" [class.d-none]="emailid.valid || emailid.untouched">
+            emailId is required
+          </small>-->
+          <div *ngIf="emailid.errors && (emailid.invalid && emailid.touched)">
+          <small class="text-danger" *ngIf="emailid.errors.required">
+              Emailid is required field
+          </small>
+          <small class="text-danger" *ngIf="emailid.errors.pattern">
+              Enter valid emailId
+          </small>
+        </div> 
+          </div>
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="username" class="form-control" autocomplete="on"  placeholder="Enter username" name="username" [(ngModel)]="user.username"
+            required #username="ngModel" [class.is-invalid]="username.invalid && username.touched">
+               <small class="text-danger" [class.d-none]="username.valid || username.untouched">
+                username is required
+              </small>
+          </div>
+          <div class="form-group">
+            <label for="first_name">Firstname:</label>
+            <input type="first_name" class="form-control" autocomplete="on"  placeholder="Enter first_name" name="first_name" [(ngModel)]="user.first_name"
+            required #first_name="ngModel" [class.is-invalid]="first_name.invalid && first_name.touched">
+               <small class="text-danger" [class.d-none]="first_name.valid || first_name.untouched">
+                first_name is required
+              </small>
+          </div>
+
+          <div class="form-group">
+            <label for="last_name">Lastname:</label>
+            <input type="last_name" class="form-control" autocomplete="on"  placeholder="Enter last_name" name="last_name" [(ngModel)]="user.last_name"
+            required #last_name="ngModel" [class.is-invalid]="last_name.invalid && last_name.touched">
+               <small class="text-danger" [class.d-none]="last_name.valid || last_name.untouched">
+                last_name is required
+              </small>
+          </div>
+     
+     
+          <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" autocomplete="on"  placeholder="Enter password" name="pwd" [(ngModel)]="user.password"
+        required #password="ngModel" [class.is-invalid]="password.invalid && password.touched">
+           <small class="text-danger" [class.d-none]="password.valid || password.untouched">
+            Password is required
+          </small>
+      </div>
+ 
+          <div class="form-group">
+            <label for="confirmpwd"> Confirm Password:</label>
+            <input type="password" class="form-control" autocomplete="on"  placeholder="Enter password" name="cpassword" (ngModel)="user.password"
+            required #cpassword="ngModel" [class.is-invalid]="cpassword.invalid && cpassword.touched">
+               <small class="text-danger" [class.d-none]="(cpassword.value==password.value) || cpassword.untouched">
+                Password is required
+              </small>
+
+      </div>
+      
+      <button [disabled]="registerForm.form.invalid" type="submit" class="btn btn-info" >Register</button>
+    </form>
+ <small class="float-right"  [routerLink]="['/login']"> Existing User? Login here</small>
+ <!--<a routerLink="/registration"><button class="btn btn-success" > New user? Register </button></a>-->
+</div>
+</html>
